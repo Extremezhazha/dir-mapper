@@ -1,0 +1,22 @@
+//
+// Created by zhazha on 11/16/25.
+//
+
+#ifndef DIR_MAPPER_FILE_COPY_MAPPER_H
+#define DIR_MAPPER_FILE_COPY_MAPPER_H
+#include "mapper.h"
+
+namespace mapper {
+    class file_copy_mapper: public mapper {
+    public:
+        ~file_copy_mapper() override;
+
+        result_t apply(dir_tree::node &source_node, dir_tree::node *target_node) override;
+
+        bool should_try_apply(dir_tree::node &source_node) override;
+
+        std::string mapped_name(dir_tree::node &source_node) override;
+    };
+} // mapper
+
+#endif //DIR_MAPPER_FILE_COPY_MAPPER_H
