@@ -1,16 +1,13 @@
-//
-// Created by zhazha on 11/16/25.
-//
-
-#include "cleanup_delegate_action.h"
-
 #include <filesystem>
 
+#include "cleanup_delegate_action.h"
 #include "node.h"
 
 namespace mapper {
-    cleanup_delegate_action::cleanup_delegate_action(std::unique_ptr<mapper_action> delegate):
-    delegate{std::move(delegate)} {}
+    cleanup_delegate_action::cleanup_delegate_action(std::unique_ptr<mapper_action> delegate) : delegate{
+        std::move(delegate)
+    } {
+    }
 
     int cleanup_delegate_action::apply(dir_tree::node &target_node) {
         if (!std::filesystem::remove(target_node.path))

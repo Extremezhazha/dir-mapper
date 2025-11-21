@@ -10,13 +10,8 @@ add_executable(dir_mapper main.cpp
         tree.h
         thread_pool.h
         utils.h
-        map_orchestrator.cpp
-        map_orchestrator.h
-        preprocessors.h
         mapper.h
         map_action.h
-        noop_action.cpp
-        noop_action.h
         createdir_action.cpp
         createdir_action.h
         copy_action.cpp
@@ -34,4 +29,23 @@ add_executable(dir_mapper main.cpp
         alac_mapper.cpp
         alac_mapper.h
         libs/args/args.hxx
+        pass.h
+        pass_orchestrator.cpp
+        pass_orchestrator.h
+        init_tree_pass.cpp
+        init_tree_pass.h
+        source_m4a_audio_type_probe_pass.cpp
+        source_m4a_audio_type_probe_pass.h
+        alac_year_probe_pass.cpp
+        alac_year_probe_pass.h
+        file_mapping_pass.cpp
+        file_mapping_pass.h
+        dir_action_pass.cpp
+        dir_action_pass.h
+        file_action_pass.cpp
+        file_action_pass.h
+        hash_generating_pass.cpp
+        hash_generating_pass.h
+        cleanup_unaudited_pass.cpp
+        cleanup_unaudited_pass.h
 )

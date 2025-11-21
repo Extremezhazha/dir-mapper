@@ -1,7 +1,3 @@
-//
-// Created by zhazha on 11/16/25.
-//
-
 #ifndef DIR_MAPPER_ALAC_MAPPER_H
 #define DIR_MAPPER_ALAC_MAPPER_H
 #include "mapper.h"

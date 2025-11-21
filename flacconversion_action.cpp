@@ -1,7 +1,3 @@
-//
-// Created by zhazha on 11/16/25.
-//
-
 #include "flacconversion_action.h"
 
 #include <format>
@@ -11,12 +7,13 @@
 #include "utils.h"
 
 namespace mapper {
-    flacconversion_action::flacconversion_action(dir_tree::node &source_node): source_node{source_node} {}
+    flacconversion_action::flacconversion_action(dir_tree::node &source_node) : source_node{source_node} {
+    }
 
     int flacconversion_action::apply(dir_tree::node &target_node) {
         std::ostringstream oss;
         oss << "ffmpeg -loglevel quiet -nostats -hide_banner -y -i " << source_node.path <<
-               " -c:v copy -c:a flac -map_metadata 0 ";
+                " -c:v copy -c:a flac -map_metadata 0 ";
         if (!source_node.ctx.metadata_year.empty()) {
             oss << "-metadata year=" << source_node.ctx.metadata_year << " ";
         }

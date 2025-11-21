@@ -1,7 +1,3 @@
-//
-// Created by zhazha on 11/16/25.
-//
-
 #ifndef DIR_MAPPER_MAPPER_H
 #define DIR_MAPPER_MAPPER_H
 #include <memory>
@@ -14,13 +10,13 @@ namespace mapper {
     public:
         virtual ~mapper() = default;
 
-        using result_t = std::pair<bool, std::unique_ptr<mapper_action>>;
+        using result_t = std::pair<bool, std::unique_ptr<mapper_action> >;
 
-        virtual result_t apply(dir_tree::node & source_node, dir_tree::node *target_node) = 0;
+        virtual result_t apply(dir_tree::node &source_node, dir_tree::node *target_node) = 0;
 
-        virtual bool should_try_apply(dir_tree::node & source_node) = 0;
+        virtual bool should_try_apply(dir_tree::node &source_node) = 0;
 
-        virtual std::string mapped_name(dir_tree::node & source_node) = 0;
+        virtual std::string mapped_name(dir_tree::node &source_node) = 0;
     };
 }
 

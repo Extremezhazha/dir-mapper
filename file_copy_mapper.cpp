@@ -1,7 +1,3 @@
-//
-// Created by zhazha on 11/16/25.
-//
-
 #include "file_copy_mapper.h"
 
 #include "copy_action.h"

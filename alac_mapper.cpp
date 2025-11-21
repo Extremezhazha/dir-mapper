@@ -1,7 +1,3 @@
-//
-// Created by zhazha on 11/16/25.
-//
-
 #include "alac_mapper.h"
 
 #include "flacconversion_action.h"

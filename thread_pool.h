@@ -1,14 +1,10 @@
-//
-// Created by zhazha on 11/15/25.
-//
-
 #ifndef DIR_MAPPER_THREAD_POOL_H
 #define DIR_MAPPER_THREAD_POOL_H
 #include <future>
 #include <queue>
 
 namespace execution {
-    template <typename R>
+    template<typename R>
     class thread_pool {
         int const max_threads;
         int current_threads;
@@ -19,18 +15,23 @@ namespace execution {
         std::mutex parallel_size_mutex;
         std::mutex worker_queue_mutex;
         std::thread collect_thread;
+
         void join();
+
         void start();
+
         void shutdown();
 
     public:
-        explicit thread_pool(int const max_threads):
-        max_threads{max_threads}, current_threads{0}, should_shutdown{false} {
+        explicit thread_pool(int const max_threads) : max_threads{max_threads}, current_threads{0},
+                                                      should_shutdown{false} {
             this->start();
         }
+
         ~thread_pool() {
             this->shutdown();
         }
+
         std::future<R> submit(std::function<R()> work);
     };
 
@@ -48,7 +49,7 @@ namespace execution {
                 std::lock_guard worker_lock{worker_queue_mutex};
                 if (this->should_shutdown)
                     throw std::runtime_error("It shouldn't be possible te submit task after thread pool shutdown");
-                workers.emplace([this, cap_work = std::move(work), promise = std::move(work_promise)]() mutable  {
+                workers.emplace([this, cap_work = std::move(work), promise = std::move(work_promise)]() mutable {
                     promise.set_value(cap_work());
 
                     {
@@ -68,7 +69,7 @@ namespace execution {
 
     template<typename R>
     void thread_pool<R>::start() {
-        collect_thread = std::thread([this]{this->join();});
+        collect_thread = std::thread([this] { this->join(); });
     }
 
     template<typename R>
@@ -79,7 +80,7 @@ namespace execution {
             {
                 std::unique_lock lock{worker_queue_mutex};
                 worker_queue_cv.wait(lock, [this] {
-                   return this->should_shutdown || !this->workers.empty();
+                    return this->should_shutdown || !this->workers.empty();
                 });
                 found_shutdown = this->should_shutdown;
                 while (!this->workers.empty()) {
@@ -87,7 +88,7 @@ namespace execution {
                     this->workers.pop();
                 }
             }
-            for (auto & thread: current_batch) {
+            for (auto &thread: current_batch) {
                 thread.join();
             }
         }
